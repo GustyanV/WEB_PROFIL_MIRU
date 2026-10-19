@@ -26,20 +26,20 @@ Dokumentasi ini mengikuti implementasi dalam repository. Data madrasah yang ters
 
 ## Website Publik
 
-| Halaman | Alamat |
-| --- | --- |
-| Homepage | / |
+| Halaman                              | Alamat                                                        |
+| ------------------------------------ | ------------------------------------------------------------- |
+| Homepage                             | /                                                             |
 | Profil, sejarah, visi-misi, sambutan | /profil, /profil/sejarah, /profil/visi-misi, /profil/sambutan |
-| Guru | /guru |
-| Program unggulan | /program-unggulan |
-| Prestasi | /prestasi |
-| Ekstrakurikuler | /ekstrakurikuler |
-| Kegiatan siswa dan detail | /kegiatan, /kegiatan/{slug} |
-| Berita dan detail | /berita, /berita/{slug} |
-| Pengumuman | /pengumuman |
-| Galeri dan album | /galeri, /galeri/{slug} |
-| Kontak | /kontak |
-| Verifikasi bukti SPMB | /verifikasi-spmb/{token} |
+| Guru                                 | /guru                                                         |
+| Program unggulan                     | /program-unggulan                                             |
+| Prestasi                             | /prestasi                                                     |
+| Ekstrakurikuler                      | /ekstrakurikuler                                              |
+| Kegiatan siswa dan detail            | /kegiatan, /kegiatan/{slug}                                   |
+| Berita dan detail                    | /berita, /berita/{slug}                                       |
+| Pengumuman                           | /pengumuman                                                   |
+| Galeri dan album                     | /galeri, /galeri/{slug}                                       |
+| Kontak                               | /kontak                                                       |
+| Verifikasi bukti SPMB                | /verifikasi-spmb/{token}                                      |
 
 Berita dan kegiatan ditampilkan sesuai status serta waktu publikasinya. Tautan media sosial aktif ditampilkan melalui data CMS. Halaman struktur organisasi masih berupa kondisi data kosong; halaman kurikulum masih berupa informasi statis yang perlu diverifikasi.
 
@@ -80,11 +80,11 @@ Banner desktop digunakan sebagai fallback jika banner mobile belum diunggah. Per
 
 ## Role Pengguna
 
-| Role | Hak akses |
-| --- | --- |
-| super_admin | Seluruh modul admin, termasuk membuat, mengubah, menonaktifkan akun admin dan mereset passwordnya. |
-| admin | Mengelola konten website, pendaftaran, periode, gelombang, dan laporan; tidak mengakses manajemen akun admin. |
-| pendaftar | Mengelola pendaftaran sendiri, dokumen, status, serta bukti pendaftaran. |
+| Role        | Hak akses                                                                                                     |
+| ----------- | ------------------------------------------------------------------------------------------------------------- |
+| super_admin | Seluruh modul admin, termasuk membuat, mengubah, menonaktifkan akun admin dan mereset passwordnya.            |
+| admin       | Mengelola konten website, pendaftaran, periode, gelombang, dan laporan; tidak mengakses manajemen akun admin. |
+| pendaftar   | Mengelola pendaftaran sendiri, dokumen, status, serta bukti pendaftaran.                                      |
 
 Pengunjung tanpa login dapat membuka website publik dan halaman verifikasi QR. Akun admin/super admin yang tidak aktif ditolak saat login dan mengakses area admin.
 
@@ -209,10 +209,10 @@ php artisan db:seed --class=DevelopmentSeeder
 
 **DEVELOPMENT ONLY — jangan gunakan akun berikut untuk production.**
 
-| Role | Email | Password development |
-| --- | --- | --- |
-| Super admin | superadmin@mi-ru.test | spmb-dev-2026 |
-| Admin | admin@mi-ru.test | spmb-dev-2026 |
+| Role        | Email                 | Password development |
+| ----------- | --------------------- | -------------------- |
+| Super admin | superadmin@mi-ru.test | spmb-dev-2026        |
+| Admin       | admin@mi-ru.test      | spmb-dev-2026        |
 
 Akun tersebut hanya tersedia jika DevelopmentSeeder dijalankan. Seeder menggunakan firstOrCreate sehingga password akun existing tidak ditimpa. DevelopmentSeeder hanya berjalan pada lingkungan local/testing.
 
@@ -340,8 +340,6 @@ Gunakan [checklist data sekolah](docs/DATA_SEKOLAH_CHECKLIST.md) dan [audit data
 
 ## Screenshot
 
-Path berikut disiapkan untuk dokumentasi. Gambar belum ditambahkan; tambahkan screenshot aktual setelah tersedia, tanpa menyertakan data pribadi pendaftar.
-
 ### Homepage
 
 ![Homepage](docs/screenshots/homepage.png)
@@ -360,4 +358,4 @@ Path berikut disiapkan untuk dokumentasi. Gambar belum ditambahkan; tambahkan sc
 
 ## Author / Pengembang
 
-Nama pengembang belum dicantumkan. Lengkapi bagian ini dengan nama dan kontak pengembang yang telah disetujui untuk dipublikasikan.
+TRI AGUS SALIM | 2321400036 |TEKNIK INFORMATIKA
