@@ -57,20 +57,31 @@ class ApplicationPrintController extends Controller
         );
 
         if (! $application->public_token) {
-            $application->update(['public_token' => (string) Str::uuid()]);
+            $application->forceFill(['public_token' => (string) Str::uuid()])->save();
         }
 
         $url = url('/verifikasi-spmb/'.$application->public_token);
+        $school = \App\Support\SchoolContent::profile(\App\Models\SchoolProfile::orderBy('id')->first());
         $logoPath = public_path('images/logo-miru.png');
-        $logo = is_file($logoPath)
-            ? 'data:image/png;base64,'.base64_encode(file_get_contents($logoPath))
-            : null;
+        if ($school?->logo && !str_contains($school->logo,'..')) {
+            $candidate = str_starts_with($school->logo,'images/') ? public_path($school->logo) : storage_path('app/public/'.$school->logo);
+            if (is_file($candidate)) $logoPath=$candidate;
+        }
+        $logo = null;
+        if (is_file($logoPath)) {
+            $bitmap=@imagecreatefromstring(file_get_contents($logoPath));
+            if ($bitmap) {
+                ob_start(); imagepng($bitmap); $bytes=ob_get_clean(); imagedestroy($bitmap);
+                $logo='data:image/png;base64,'.base64_encode($bytes);
+            }
+        }
 
         return [
             'application' => $application,
             'a' => $application,
             'url' => $url,
             'logo' => $logo,
+            'school' => $school,
             // SVG memakai backend bawaan BaconQrCode, sehingga tidak memerlukan Imagick.
             'qr' => base64_encode(QrCode::format('svg')->size(150)->generate($url)),
         ];
@@ -78,6 +89,6 @@ class ApplicationPrintController extends Controller
 
     private function authorizeApplicant(StudentApplication $application): void
     {
-        abort_unless(auth()->id() === $application->user_id, 403);
+        abort_unless((int) auth()->id() === (int) $application->user_id, 403);
     }
 }

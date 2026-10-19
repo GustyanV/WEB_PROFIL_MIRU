@@ -7,9 +7,9 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                primary: '#0F8B83',
-                'primary-dark': '#086A64',
-                accent: '#F4B942',
+                primary: 'rgb(var(--site-primary, 15 139 131) / <alpha-value>)',
+                'primary-dark': 'rgb(var(--site-primary-dark, 8 106 100) / <alpha-value>)',
+                accent: 'rgb(var(--site-accent, 244 185 66) / <alpha-value>)',
                 canvas: '#F8FAFA',
                 ink: '#1F2937',
             },

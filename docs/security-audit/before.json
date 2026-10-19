@@ -1,0 +1,449 @@
+{
+    "advisories": {
+        "dompdf/dompdf": [
+            {
+                "title": "Dompdf: Embedded SVG images can leak existence of files and directories within the filesystem",
+                "cve": "CVE-2026-59943",
+                "link": "https://github.com/advisories/GHSA-j8qw-6jw8-r297",
+                "reportedAt": "2026-07-22T22:52:44+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-j8qw-6jw8-r297"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-cv56-2228-pzr6",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            },
+            {
+                "title": "Dompdf: Denial of Service (DoS) via Resource Exhaustion using Oversized Image Bitmaps",
+                "cve": "CVE-2026-59942",
+                "link": "https://github.com/advisories/GHSA-f5gf-2cj8-52g2",
+                "reportedAt": "2026-07-22T22:51:40+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-f5gf-2cj8-52g2"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-6r8f-nxsb-67bq",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            },
+            {
+                "title": "Dompdf: Uncontrolled resource consumption based on declared BMP dimensions",
+                "cve": "CVE-2026-59941",
+                "link": "https://github.com/advisories/GHSA-8hg6-c449-896m",
+                "reportedAt": "2026-07-22T22:50:34+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-8hg6-c449-896m"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-gh7h-hhy4-byg7",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            },
+            {
+                "title": "Dompdf: Local file read due to improper file path validation in SVG images encoded as data-URI",
+                "cve": "CVE-2026-56722",
+                "link": "https://github.com/advisories/GHSA-cx96-42px-69fm",
+                "reportedAt": "2026-07-22T21:30:01+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-cx96-42px-69fm"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-mwt3-h9tv-kx78",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            },
+            {
+                "title": "Dompdf: File existence oracle via font-face stylesheet declaration",
+                "cve": "CVE-2026-55555",
+                "link": "https://github.com/advisories/GHSA-7x2p-4jvh-6384",
+                "reportedAt": "2026-07-22T21:07:07+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-7x2p-4jvh-6384"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-hp6n-n4kz-21wk",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            },
+            {
+                "title": "Dompdf: Chroot Validation Bypass",
+                "cve": "CVE-2026-55554",
+                "link": "https://github.com/advisories/GHSA-wvh6-f5jh-8gw4",
+                "reportedAt": "2026-07-22T21:06:48+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-wvh6-f5jh-8gw4"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-mckv-s5hg-868k",
+                "packageName": "dompdf/dompdf",
+                "affectedVersions": "<3.1.6"
+            }
+        ],
+        "laravel/framework": [
+            {
+                "title": "Laravel: XSS in Debug Page Information",
+                "cve": "CVE-2026-102279",
+                "link": "https://github.com/advisories/GHSA-jh5r-qr3c-85q8",
+                "reportedAt": "2026-09-29T18:24:25+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-jh5r-qr3c-85q8"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-d5tc-s1qs-h781",
+                "packageName": "laravel/framework",
+                "affectedVersions": ">=13.0.0,<13.30.0|<12.69.0"
+            },
+            {
+                "title": "Laravel Framework: Temporary Signed URL Path Confusion",
+                "cve": null,
+                "link": "https://github.com/advisories/GHSA-crmm-hgp2-wgrp",
+                "reportedAt": "2026-06-17T13:54:13+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-crmm-hgp2-wgrp"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-m5cs-t1y6-qpcs",
+                "packageName": "laravel/framework",
+                "affectedVersions": "<12.61.1|>=13.0.0,<13.12.0"
+            },
+            {
+                "title": "Laravel Framework: CRLF injection in default email rule ",
+                "cve": null,
+                "link": "https://github.com/advisories/GHSA-5vg9-5847-vvmq",
+                "reportedAt": "2026-06-17T13:53:44+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-5vg9-5847-vvmq"
+                    }
+                ],
+                "severity": "high",
+                "advisoryId": "PKSA-3r5d-mb8f-1qw9",
+                "packageName": "laravel/framework",
+                "affectedVersions": "<12.60.0|>=13.0.0,<=13.9.0"
+            },
+            {
+                "title": "Laravel CRLF injection in default email rule",
+                "cve": "CVE-2026-48019",
+                "link": "https://github.com/laravel/framework/security/advisories/GHSA-5vg9-5847-vvmq",
+                "reportedAt": "2026-05-19T18:13:00+00:00",
+                "sources": [
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "laravel/framework/CVE-2026-48019.yaml"
+                    }
+                ],
+                "severity": null,
+                "advisoryId": "PKSA-mdq4-51ck-6kdq",
+                "packageName": "laravel/framework",
+                "affectedVersions": ">=9.0.0,<10.0.0|>=10.0.0,<11.0.0|>=11.0.0,<12.0.0|>=12.0.0,<12.60.0|>=13.0.0,<13.10.0"
+            },
+            {
+                "title": "Laravel has a File Validation Bypass",
+                "cve": "CVE-2025-27515",
+                "link": "https://github.com/advisories/GHSA-78fx-h6xr-vch4",
+                "reportedAt": "2025-03-05T19:09:39+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-78fx-h6xr-vch4"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-8qx3-n5y5-vvnd",
+                "packageName": "laravel/framework",
+                "affectedVersions": "<10.48.29|>=11.0.0,<11.44.1|>=12.0.0,<12.1.1"
+            }
+        ],
+        "symfony/http-foundation": {
+            "0": {
+                "title": "CVE-2026-108082: ReDoS in HeaderUtils::split() Reachable Through the Cache-Control Request Header",
+                "cve": "CVE-2026-108082",
+                "link": "https://symfony.com/cve-2026-108082",
+                "reportedAt": "2026-09-15T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/http-foundation/CVE-2026-108082.yaml"
+                    }
+                ],
+                "severity": null,
+                "advisoryId": "PKSA-xmwy-rmx5-m7h4",
+                "packageName": "symfony/http-foundation",
+                "affectedVersions": ">=5.4.1,<5.4.54|>=6.0.1,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.46|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.19|>=8.0.0,<8.1.0|>=8.1.0,<8.1.7"
+            },
+            "2": {
+                "title": "CVE-2025-64500: Incorrect parsing of PATH_INFO can lead to limited authorization bypass",
+                "cve": "CVE-2025-64500",
+                "link": "https://symfony.com/blog/cve-2025-64500-incorrect-parsing-of-path-info-can-lead-to-limited-authorization-bypass",
+                "reportedAt": "2025-11-12T11:09:14+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-3rg7-wf37-54rm"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/http-foundation/CVE-2025-64500.yaml"
+                    }
+                ],
+                "severity": "high",
+                "advisoryId": "PKSA-365x-2zjk-pt47",
+                "packageName": "symfony/http-foundation",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.50|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.29|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.3.7"
+            },
+            "3": {
+                "title": "CVE-2024-50345: Open redirect via browser-sanitized URLs",
+                "cve": "CVE-2024-50345",
+                "link": "https://symfony.com/cve-2024-50345",
+                "reportedAt": "2024-11-05T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-mrqx-rp3w-jpjp"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/http-foundation/CVE-2024-50345.yaml"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-b35n-565h-rs4q",
+                "packageName": "symfony/http-foundation",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.46|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.14|>=7.0.0,<7.1.0|>=7.1.0,<7.1.7"
+            }
+        },
+        "symfony/mailer": [
+            {
+                "title": "CVE-2026-45068: Argument Injection in SendmailTransport via Dash-Prefixed Recipient Address",
+                "cve": "CVE-2026-45068",
+                "link": "https://symfony.com/cve-2026-45068",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-xx3c-qf5g-hc39"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/mailer/CVE-2026-45068.yaml"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-28rh-rzzn-djk4",
+                "packageName": "symfony/mailer",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            }
+        ],
+        "symfony/mime": [
+            {
+                "title": "CVE-2026-45070: Email Header Injection via Non-Token Characters in Mime Parameter Names",
+                "cve": "CVE-2026-45070",
+                "link": "https://symfony.com/cve-2026-45070",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-vqc8-7275-q272"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/mime/CVE-2026-45070.yaml"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-wtxr-p26d-nn42",
+                "packageName": "symfony/mime",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            },
+            {
+                "title": "CVE-2026-45067: Email Header / SMTP Command Injection via CRLF in Symfony\\Component\\Mime\\Address",
+                "cve": "CVE-2026-45067",
+                "link": "https://symfony.com/cve-2026-45067",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-qpmx-3rfj-7rhv"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/mime/CVE-2026-45067.yaml"
+                    }
+                ],
+                "severity": "high",
+                "advisoryId": "PKSA-2n2k-66v2-bwg3",
+                "packageName": "symfony/mime",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            }
+        ],
+        "symfony/process": {
+            "1": {
+                "title": "CVE-2024-51736: Command execution hijack on Windows with Process class",
+                "cve": "CVE-2024-51736",
+                "link": "https://symfony.com/cve-2024-51736",
+                "reportedAt": "2024-11-05T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-qq5c-677p-737q"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/process/CVE-2024-51736.yaml"
+                    }
+                ],
+                "severity": "high",
+                "advisoryId": "PKSA-wws7-mr54-jsny",
+                "packageName": "symfony/process",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.46|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.14|>=7.0.0,<7.1.0|>=7.1.0,<7.1.7"
+            }
+        },
+        "symfony/routing": [
+            {
+                "title": "CVE-2026-48784: UrlGenerator Dot-Segment Encoding Skips Every Other Chained `../` or `./` → Generated URL Collapses Off-Route Under RFC 3986 Normalization",
+                "cve": "CVE-2026-48784",
+                "link": "https://symfony.com/cve-2026-48784",
+                "reportedAt": "2026-05-26T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-h5x3-xfc9-m39h"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/routing/CVE-2026-48784.yaml"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-bf7t-jnpz-492k",
+                "packageName": "symfony/routing",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.53|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.41|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.13|>=8.0.0,<8.0.13"
+            },
+            {
+                "title": "CVE-2026-45065: UrlGenerator Route-Requirement Bypass via Unanchored Regex Alternation → Off-Site //host URL Injection",
+                "cve": "CVE-2026-45065",
+                "link": "https://symfony.com/cve-2026-45065",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-72xp-p242-47p9"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/routing/CVE-2026-45065.yaml"
+                    }
+                ],
+                "severity": "medium",
+                "advisoryId": "PKSA-yc7t-91v9-99xs",
+                "packageName": "symfony/routing",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            }
+        ],
+        "symfony/yaml": [
+            {
+                "title": "CVE-2026-109413: Unbounded Recursion in the YAML Inline Lexer Lets a Single Document Crash the Process",
+                "cve": "CVE-2026-109413",
+                "link": "https://symfony.com/cve-2026-109413",
+                "reportedAt": "2026-08-30T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/yaml/CVE-2026-109413.yaml"
+                    }
+                ],
+                "severity": null,
+                "advisoryId": "PKSA-xz3r-9gp4-4m1z",
+                "packageName": "symfony/yaml",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.54|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.45|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.18|>=8.0.0,<8.1.0|>=8.1.0,<8.1.6"
+            },
+            {
+                "title": "CVE-2026-45304: YAML Parser Exponential Memory Allocation via Recursive Collection-Alias Expansion (\"Billion Laughs\")",
+                "cve": "CVE-2026-45304",
+                "link": "https://symfony.com/cve-2026-45304",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-4qpc-3hr4-r2p4"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/yaml/CVE-2026-45304.yaml"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-v5yj-8nmz-sk2q",
+                "packageName": "symfony/yaml",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            },
+            {
+                "title": "CVE-2026-45305: YAML Parser ReDoS via Catastrophic Backtracking in Parser::cleanup() Regex",
+                "cve": "CVE-2026-45305",
+                "link": "https://symfony.com/cve-2026-45305",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-9frc-8383-795m"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/yaml/CVE-2026-45305.yaml"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-ft77-7h5f-p3r6",
+                "packageName": "symfony/yaml",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            },
+            {
+                "title": "CVE-2026-45133: YAML Parser Stack Exhaustion via Unbounded Recursion in Nested Blocks, Sequences, and Mappings",
+                "cve": "CVE-2026-45133",
+                "link": "https://symfony.com/cve-2026-45133",
+                "reportedAt": "2026-05-20T08:00:00+00:00",
+                "sources": [
+                    {
+                        "name": "GitHub",
+                        "remoteId": "GHSA-c2p3-7m5p-cv8x"
+                    },
+                    {
+                        "name": "FriendsOfPHP/security-advisories",
+                        "remoteId": "symfony/yaml/CVE-2026-45133.yaml"
+                    }
+                ],
+                "severity": "low",
+                "advisoryId": "PKSA-b14r-zh1d-vdrc",
+                "packageName": "symfony/yaml",
+                "affectedVersions": ">=2.0.0,<3.0.0|>=3.0.0,<4.0.0|>=4.0.0,<5.0.0|>=5.0.0,<5.1.0|>=5.1.0,<5.2.0|>=5.2.0,<5.3.0|>=5.3.0,<5.4.0|>=5.4.0,<5.4.52|>=6.0.0,<6.1.0|>=6.1.0,<6.2.0|>=6.2.0,<6.3.0|>=6.3.0,<6.4.0|>=6.4.0,<6.4.40|>=7.0.0,<7.1.0|>=7.1.0,<7.2.0|>=7.2.0,<7.3.0|>=7.3.0,<7.4.0|>=7.4.0,<7.4.12|>=8.0.0,<8.0.12"
+            }
+        ]
+    },
+    "abandoned": []
+}

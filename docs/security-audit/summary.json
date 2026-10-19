@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-19",
+  "php": "8.0.30",
+  "phpRequirement": "^8.0.2",
+  "before": {
+    "entries": 24,
+    "packages": 8,
+    "severity": {
+      "medium": 10,
+      "low": 7,
+      "high": 4,
+      "unspecified": 3
+    }
+  },
+  "after": {
+    "entries": 24,
+    "packages": 8,
+    "severity": {
+      "medium": 10,
+      "low": 7,
+      "high": 4,
+      "unspecified": 3
+    },
+    "uniqueAdvisories": 23
+  },
+  "removed": [],
+  "added": [],
+  "packageChanges": [
+    {
+      "package": "barryvdh/laravel-dompdf",
+      "before": "v2.0.0",
+      "after": "v2.2.0"
+    }
+  ],
+  "verification": {
+    "laravelTestsPassed": 35,
+    "migrationStatus": "all Ran",
+    "routeCount": 104,
+    "frontendBuild": "passed",
+    "platformRequirements": "passed"
+  }
+}

@@ -1,0 +1,10 @@
+@extends('layouts.admin')
+@section('title','Gelombang SPMB')
+@section('content')
+<div class="flex flex-wrap items-center justify-between gap-4"><h1 class="text-3xl">Gelombang SPMB</h1><a href="{{ route('admin.waves.create') }}" class="btn-primary">Tambah Gelombang</a></div>
+<form method="GET" class="my-5 flex flex-wrap gap-3"><select name="period" class="rounded-xl border-slate-200"><option value="">Semua periode</option>@foreach($periods as $period)<option value="{{ $period->id }}" @selected((string)request('period')===(string)$period->id)>{{ $period->name }}</option>@endforeach</select><button class="btn-primary">Filter</button></form>
+<div class="surface-card overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr>@foreach(['Nama / Periode','Tanggal','Kuota','Status','Pendaftar','Aksi'] as $label)<th class="p-3">{{ $label }}</th>@endforeach</tr></thead><tbody>
+@forelse($waves as $wave)<tr class="border-t"><td class="p-3 font-bold">{{ $wave->name }}<span class="mt-1 block text-xs font-normal">{{ $wave->period->name }}</span></td><td class="whitespace-nowrap p-3">{{ $wave->start_date->format('d/m/Y') }} – {{ $wave->end_date->format('d/m/Y') }}</td><td class="p-3">{{ $wave->quota ?? '—' }}</td><td class="p-3">{{ $wave->is_active?'Aktif':'Nonaktif' }}</td><td class="p-3">{{ $wave->applications_count }}</td><td class="p-3"><a href="{{ route('admin.waves.edit',$wave) }}" class="font-bold text-primary">Edit</a>
+<form action="{{ route('admin.waves.destroy',$wave) }}" method="POST" onsubmit="return confirm('Hapus gelombang ini?')" class="mt-2">@csrf @method('DELETE')<button class="text-red-600">Hapus</button></form></td></tr>
+@empty<tr><td colspan="6" class="p-4">Belum ada gelombang.</td></tr>@endforelse</tbody></table></div><div class="mt-5">{{ $waves->links() }}</div>
+@endsection

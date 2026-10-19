@@ -1,6 +1,9 @@
-<footer id="contact" class="bg-primary-dark py-10 text-teal-50">
-    <div class="mx-auto flex max-w-7xl flex-col gap-4 px-4 text-sm sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
-        <div><p class="font-bold">MI Raudlatul Ulum</p><p class="mt-1 text-teal-100/75">JL. PP. NURUL QODIM JABUNG WETAN</p></div>
-        <p class="text-teal-100/75">Copyright {{ now()->year }} MI Raudlatul Ulum.</p>
-    </div>
-</footer>
+<footer id="contact" class="bg-primary-dark text-teal-50">
+<div class="page-shell grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
+<div class="lg:col-span-2"><div class="flex items-center gap-3">
+<img src="{{ $siteProfile?->site_logo_url ?? asset('images/logo-miru.png') }}" alt="Logo {{ $siteProfile?->name ?? 'Madrasah' }}" class="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1">
+<div class="min-w-0"><p class="break-words font-extrabold text-white">{{ $siteProfile?->name ?? 'MI Raudlatul Ulum' }}</p><p class="mt-1 text-sm text-teal-100">{{ $siteProfile?->tagline ?? 'Website Madrasah' }}</p></div></div>
+<p class="mt-5 max-w-md whitespace-pre-line text-sm leading-6 text-teal-100">{{ $siteProfile?->footer_text ?? 'Informasi madrasah akan diperbarui setelah data resmi tersedia.' }}</p></div>
+<div><h2 class="font-bold text-white">Menu Cepat</h2><div class="mt-4 space-y-2 text-sm"><a class="block hover:text-accent" href="{{ route('profile') }}">Profil Madrasah</a><a class="block hover:text-accent" href="{{ route('programs') }}">Program Unggulan</a><a class="block hover:text-accent" href="{{ route('activities') }}">Kegiatan Siswa</a><a class="block hover:text-accent" href="{{ route('news') }}">Berita</a><a class="block hover:text-accent" href="{{ route('register') }}">SPMB Online</a></div></div>
+<div><h2 class="font-bold text-white">Kontak</h2><div class="mt-4 space-y-4 text-teal-100"><x-contact-details /><x-social-links /></div></div>
+</div><div class="border-t border-white/15 px-4 py-4 text-center text-xs text-teal-100">{{ $siteProfile?->copyright_text ?? '© '.now()->year.' '.($siteProfile?->name ?? 'MI Raudlatul Ulum').'. Semua hak dilindungi.' }}</div></footer>

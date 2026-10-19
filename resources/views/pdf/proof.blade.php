@@ -29,18 +29,18 @@
         <table class="letterhead-table">
             <tr>
                 <td class="logo-cell">
-                    @if($logo)<img class="logo" src="{{ $logo }}" alt="Logo MI Raudlatul Ulum">@endif
+                    @if($logo)<img class="logo" src="{{ $logo }}" alt="Logo {{ $school?->name ?: 'Madrasah' }}">@endif
                 </td>
                 <td class="school-info">
-                    <div class="foundation">YAYASAN PENDIDIKAN ISLAM RAUDLATUL ULUM</div>
-                    <div class="school-name">MADRASAH IBTIDAIYAH RAUDLATUL ULUM</div>
-                    <div class="detail">STATUS : TERAKREDITASI B</div>
-                    <div class="detail">NSM : 111 23 51 30 222 &nbsp; NPSN : 60716514</div>
-                    <div class="detail">Jabung Wetan Kecamatan Paiton Kabupaten Probolinggo</div>
+                    <div class="foundation">PENERIMAAN MURID BARU</div>
+                    <div class="school-name">{{ $school?->name ?: 'Madrasah' }}</div>
+
+                    <div class="detail">@if($school?->nsm)NSM : {{ $school->nsm }}@endif @if($school?->npsn)&nbsp; NPSN : {{ $school->npsn }}@endif</div>
+
                 </td>
             </tr>
         </table>
-        <div class="address">Alamat : Jln. Nurul Qodim Km. 47 Jabung Wetan Paiton Probolinggo 67291</div>
+        <div class="address">{{ $school?->address ? 'Alamat : '.$school->address : 'Alamat madrasah belum diisi.' }}</div>
     </header>
 
     <h1 class="title">BUKTI PENDAFTARAN SPMB</h1>
@@ -63,6 +63,6 @@
         <img alt="QR Verifikasi" src="data:image/svg+xml;base64,{{ $qr }}">
         <div>Scan QR Code untuk verifikasi bukti pendaftaran.</div>
     </div>
-    <p class="note">Simpan bukti ini sebagai dokumen resmi proses SPMB MI Raudlatul Ulum.</p>
+    <p class="note">Simpan bukti ini sebagai dokumen resmi proses SPMB {{ $school?->name ?: 'madrasah' }}.</p>
 </body>
 </html>
