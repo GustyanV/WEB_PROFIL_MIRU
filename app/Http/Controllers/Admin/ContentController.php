@@ -11,7 +11,7 @@ class ContentController extends Controller {
  'pengumuman'=>[Announcement::class,'Pengumuman',['title'=>'Judul','content'=>'Isi:textarea','status'=>'Status:select(draft|published)','published_at'=>'Tanggal Publikasi:datetime']],
  'galeri'=>[GalleryAlbum::class,'Album Galeri',['title'=>'Judul','slug'=>'Slug','description'=>'Deskripsi:textarea','cover'=>'Cover:image']],
  ][$type] ?? abort(404); }
- public function index(Request $r,string $type){[$model,$title,$fields]=$this->config($type);$items=$model::query()->when($r->search,fn($q,$s)=>$q->where(array_key_first($fields),'like',"%$s%"))->latest()->paginate(10)->withQueryString();return view('admin.content.index',compact('type','title','fields','items'));}
+ public function index(Request $r,string $type){[$model,$title,$fields]=$this->config($type);$items=$model::query()->when($r->search,fn($q,$s)=>$q->where(array_key_first($fields),\App\Support\DatabaseSearch::operator(),"%$s%"))->latest()->paginate(10)->withQueryString();return view('admin.content.index',compact('type','title','fields','items'));}
  public function create(string $type){[$model,$title,$fields]=$this->config($type);return view('admin.content.form',compact('type','title','fields'));}
  public function store(Request $r,string $type){[$model,$title,$fields]=$this->config($type);$data=$this->validated($r,$type,$fields);$model::create($data);return redirect()->route('admin.content.index',$type)->with('success',"$title berhasil ditambahkan.");}
  public function edit(string $type,int $id){[$model,$title,$fields]=$this->config($type);$item=$model::findOrFail($id);return view('admin.content.form',compact('type','title','fields','item'));}

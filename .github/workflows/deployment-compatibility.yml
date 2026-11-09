@@ -1,0 +1,56 @@
+name: Deployment compatibility
+on:
+  push:
+    branches: [deploy-vercel]
+  pull_request:
+    branches: [deploy-vercel]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  postgres:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_DB: miru_deployment_test
+          POSTGRES_USER: postgres
+          # Ephemeral CI-only password; never a production credential.
+          POSTGRES_PASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      APP_ENV: testing
+      DB_CONNECTION: pgsql
+      DB_HOST: 127.0.0.1
+      DB_PORT: 5432
+      DB_DATABASE: miru_deployment_test
+      DB_USERNAME: postgres
+      DB_PASSWORD: ${{ github.run_id }}-${{ github.run_attempt }}
+      DB_SSLMODE: disable
+      RUN_POSTGRES_TESTS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_pgsql, pdo_sqlite, gd, mbstring, dom
+          coverage: none
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: composer install --no-interaction --prefer-dist
+      - run: cp .env.example .env
+      - run: php artisan key:generate
+      - run: composer validate
+      - run: php artisan migrate --force
+      - run: php artisan test
+      - run: vendor/bin/phpunit tests/Integration/PostgresDeploymentTest.php
+      - run: npm ci
+      - run: npm run build

@@ -12,7 +12,7 @@ class AdminActivityController extends Controller
 {
     public function index(Request $request) {
         $q = Activity::with('images');
-        if ($search = $request->query('search')) $q->where(function ($q) use ($search) { $q->where('title','like','%'.$search.'%')->orWhere('excerpt','like','%'.$search.'%'); });
+        if ($search = $request->query('search')) $q->where(function ($q) use ($search) { $q->where('title',\App\Support\DatabaseSearch::operator(),'%'.$search.'%')->orWhere('excerpt',\App\Support\DatabaseSearch::operator(),'%'.$search.'%'); });
         if ($category = $request->query('category')) $q->where('category',$category);
         if ($status = $request->query('status')) $q->where('status',$status);
         return view('admin.activities.index',['activities'=>$q->orderByDesc('activity_date')->orderByDesc('id')->paginate(15)->withQueryString()]);

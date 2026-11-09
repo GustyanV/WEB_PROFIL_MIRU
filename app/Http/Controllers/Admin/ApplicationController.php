@@ -6,7 +6,7 @@ class ApplicationController extends Controller { public function index(Request $
  ->when($r->status,fn($x,$v)=>$x->where('status',$v))
  ->when($r->period,fn($x,$v)=>$x->where('admission_period_id',$v))
  ->when($r->wave,fn($x,$v)=>$x->where('admission_wave_id',$v))
- ->when($r->search,function($x,$v){$x->where(function($group)use($v){$group->where('registration_number','like',"%$v%")->orWhereHas('user',fn($u)=>$u->where('name','like',"%$v%")->orWhere('email','like',"%$v%"))->orWhereHas('studentProfile',fn($p)=>$p->where('full_name','like',"%$v%")->orWhere('nik','like',"%$v%"));});});
+ ->when($r->search,function($x,$v){$x->where(function($group)use($v){$group->where('registration_number',\App\Support\DatabaseSearch::operator(),"%$v%")->orWhereHas('user',fn($u)=>$u->where('name',\App\Support\DatabaseSearch::operator(),"%$v%")->orWhere('email',\App\Support\DatabaseSearch::operator(),"%$v%"))->orWhereHas('studentProfile',fn($p)=>$p->where('full_name',\App\Support\DatabaseSearch::operator(),"%$v%")->orWhere('nik',\App\Support\DatabaseSearch::operator(),"%$v%"));});});
  $sort=$r->sort??'newest';
  $q=match($sort){'oldest'=>$q->oldest(),'name_asc'=>$q->join('student_profiles','student_profiles.student_application_id','=','student_applications.id')->orderBy('student_profiles.full_name')->select('student_applications.*'),'name_desc'=>$q->join('student_profiles','student_profiles.student_application_id','=','student_applications.id')->orderByDesc('student_profiles.full_name')->select('student_applications.*'),default=>$q->latest()};
  return view('admin.applications.index',['items'=>$q->paginate(15)->withQueryString(),'periods'=>AdmissionPeriod::all(),'waves'=>AdmissionWave::all()]);

@@ -330,6 +330,8 @@ tests/Feature/          Pengujian fitur
 
 ## Status Project
 
+Persiapan deployment GitHub → Vercel + Supabase tersedia pada branch deploy-vercel. Ikuti [panduan deployment](docs/VERCEL_SUPABASE_DEPLOYMENT.md), [setup database](docs/SUPABASE_SETUP.md), [setup Storage](docs/SUPABASE_STORAGE_SETUP.md), dan [checklist deployment](docs/DEPLOYMENT_CHECKLIST.md). Deployment cloud belum dijalankan tanpa credential asli.
+
 Modul utama website publik, CMS, dan SPMB sudah diimplementasikan. Finalisasi data resmi, peninjauan konfigurasi server, dan penyelesaian temuan keamanan dependensi tetap diperlukan sebelum penggunaan production.
 
 Halaman struktur organisasi belum memiliki data resmi; informasi kurikulum masih statis. Jangan menganggap halaman tersebut sebagai modul CMS lengkap.

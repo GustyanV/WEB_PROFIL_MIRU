@@ -14,6 +14,10 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
+        if ($this->app->environment('production') && str_starts_with(config('app.url', ''), 'https://')) {
+            \Illuminate\Support\Facades\URL::forceRootUrl(config('app.url'));
+            \Illuminate\Support\Facades\URL::forceScheme('https');
+        }
         View::composer('*', function ($view) {
             $request=request();
             if (!$request->attributes->has('site_profile_data')) $request->attributes->set('site_profile_data',['profile'=>\App\Support\SchoolContent::profile(SchoolProfile::orderBy('id')->first())]);

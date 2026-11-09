@@ -16,3 +16,22 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Deployment state, credentials, database dumps, and backups
+/.vercel
+.env.*
+!.env.example
+!.env.production.example
+*.sql
+*.dump
+*.sqlite
+*.sqlite3
+*.bak
+/backups
+/storage/app/private
+/storage/app/testing
+.env
+.env.supabase
+.env.mysql.backup
+.env.production
+.env.production.*

@@ -11,7 +11,7 @@ class AdminUserController extends Controller {
     public function index(Request $request) {
         $request->validate(['search'=>'nullable|string|max:255']);
         $q=User::where('role','admin');
-        if ($search=$request->query('search')) $q->where(fn($q)=>$q->where('name','like','%'.$search.'%')->orWhere('email','like','%'.$search.'%'));
+        if ($search=$request->query('search')) $q->where(fn($q)=>$q->where('name',\App\Support\DatabaseSearch::operator(),'%'.$search.'%')->orWhere('email',\App\Support\DatabaseSearch::operator(),'%'.$search.'%'));
         return view('admin.users.index',['users'=>$q->latest()->paginate(15)->withQueryString()]);
     }
     public function create() { return view('admin.users.form',['user'=>new User(['is_active'=>true])]); }

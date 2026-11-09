@@ -10,7 +10,7 @@ class SchoolContent
         $fallbacks=['teacher'=>'teacher','headmaster'=>'teacher','news'=>'news','activity'=>'activity','gallery'=>'gallery','school'=>'school'];
         if ($path && !str_contains($path,'..')) {
             if (str_starts_with($path,'images/') && is_file(public_path($path))) return asset($path);
-            if (!str_starts_with($path,'images/') && Storage::disk('public')->exists($path)) return asset('storage/'.$path);
+            if (!str_starts_with($path,'images/') && Storage::disk('public')->exists($path)) return url(Storage::disk('public')->url($path));
         }
         return asset('images/fallback-'.($fallbacks[$kind] ?? 'school').'.svg');
     }

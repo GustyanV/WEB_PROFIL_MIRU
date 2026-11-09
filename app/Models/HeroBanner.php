@@ -12,7 +12,7 @@ class HeroBanner extends Model
     ];
     protected $casts=['is_active'=>'boolean'];
     private function bannerUrl(?string $path): ?string {
-        return $path && str_starts_with($path,'hero/') && !str_contains($path,'..') && Storage::disk('public')->exists($path) ? asset('storage/'.$path) : null;
+        return $path && str_starts_with($path,'hero/') && !str_contains($path,'..') && Storage::disk('public')->exists($path) ? url(Storage::disk('public')->url($path)) : null;
     }
     public function getDesktopBannerUrlAttribute(): ?string { return $this->bannerUrl($this->banner_desktop); }
     public function getMobileBannerUrlAttribute(): ?string { return $this->bannerUrl($this->banner_mobile); }

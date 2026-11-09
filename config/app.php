@@ -55,6 +55,7 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
+    'vercel' => env('VERCEL', false),
 
     'asset_url' => env('ASSET_URL'),
 

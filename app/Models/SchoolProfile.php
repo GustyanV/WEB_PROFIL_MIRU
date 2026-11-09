@@ -7,7 +7,7 @@ class SchoolProfile extends Model {
     private function siteAsset(?string $path): string {
         if ($path && !str_contains($path,'..')) {
             if (str_starts_with($path,'images/') && is_file(public_path($path))) return asset($path);
-            if (Storage::disk('public')->exists($path)) return asset('storage/'.$path);
+            if (Storage::disk('public')->exists($path)) return url(Storage::disk('public')->url($path));
         }
         return asset('images/logo-miru.png');
     }
