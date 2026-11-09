@@ -39,8 +39,12 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
     Route::post('/register', [AuthController::class, 'register'])->name('register.store');
     Route::get('/forgot-password', [AuthController::class, 'showForgot'])->name('password.request');
-    Route::post('/forgot-password', [AuthController::class, 'sendReset'])->name('password.email');
+    Route::post('/forgot-password', [AuthController::class, 'sendReset'])->middleware('throttle:6,1')->name('password.email');
+    Route::get('/reset-password/{token}', [AuthController::class, 'showReset'])->name('password.reset');
+    Route::post('/reset-password', [AuthController::class, 'resetPassword'])->middleware('throttle:6,1')->name('password.update');
 });
+Route::get('/dashboard/berkas/{document}', [\App\Http\Controllers\SpmbDocumentController::class, 'applicant'])->middleware(['auth','role:pendaftar'])->name('applicant.documents.show');
+Route::get('/admin/berkas/{document}', [\App\Http\Controllers\SpmbDocumentController::class, 'show'])->middleware(['auth','role:admin,super_admin'])->name('admin.documents.show');
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 Route::get('/verifikasi-spmb/{token}',[ApplicationPrintController::class,'verify'])->name('spmb.verify');
 Route::middleware(['auth','role:pendaftar'])->prefix('dashboard')->name('applicant.')->group(function(){Route::get('/',[ApplicantController::class,'dashboard'])->name('dashboard');Route::get('/biodata',[ApplicantController::class,'biodata'])->name('biodata');Route::post('/biodata',[ApplicantController::class,'saveBiodata'])->name('biodata.save');Route::get('/orang-tua',[ApplicantController::class,'parents'])->name('parents');Route::post('/orang-tua',[ApplicantController::class,'saveParents'])->name('parents.save');Route::get('/dokumen',[ApplicantController::class,'documents'])->name('documents');Route::post('/dokumen/{type}',[ApplicantController::class,'upload'])->name('documents.upload');Route::delete('/dokumen/{id}',[ApplicantController::class,'removeDocument'])->name('documents.delete');Route::get('/review',[ApplicantController::class,'review'])->name('review');Route::post('/submit',[ApplicantController::class,'submit'])->name('submit');Route::get('/status',[ApplicantController::class,'status'])->name('status');Route::get('/cetak-bukti/{application}',[ApplicationPrintController::class,'preview'])->name('proof');Route::get('/cetak-bukti/{application}/pdf',[ApplicationPrintController::class,'pdf'])->name('proof.pdf');});

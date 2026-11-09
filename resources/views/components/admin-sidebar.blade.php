@@ -16,7 +16,7 @@ if(auth()->user()->role==='super_admin') $groups['SISTEM']=[['Pengguna Admin','a
 @foreach($groups as $heading=>$links)<section><h2 class="px-3 text-[10px] font-bold tracking-[.16em] text-teal-200">{{ $heading }}</h2>
 <div class="mt-2 space-y-1">@foreach($links as [$label,$name,$parameter,$pattern])
 @php($active = $parameter ? request()->routeIs('admin.content.*') && request()->route('type') === $parameter : request()->routeIs($pattern))
-<a href="{{ $parameter ? route($name,$parameter) : route($name) }}" @if($active) aria-current="page" @endif class="block rounded-lg px-3 py-2 text-sm {{ $active ? 'bg-white/20 font-bold text-white' : 'text-teal-50 hover:bg-white/10' }}">{{ $label }}</a>
+<a href="{{ $parameter ? route($name,$parameter) : route($name) }}" @if($active) aria-current="page" @endif class="flex min-h-11 items-center rounded-lg px-3 py-2 text-sm {{ $active ? 'bg-white/20 font-bold text-white' : 'text-teal-50 hover:bg-white/10' }}">{{ $label }}</a>
 @endforeach</div></section>@endforeach
 <form method="POST" action="{{ route('logout') }}">@csrf<button class="w-full rounded-lg border border-white/20 px-3 py-2 text-left text-sm font-bold">Logout</button></form>
 </nav>

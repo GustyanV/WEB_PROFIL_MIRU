@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.applicant')
 
 @section('title', 'Bukti Pendaftaran')
 

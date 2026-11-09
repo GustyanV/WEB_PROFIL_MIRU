@@ -6,5 +6,5 @@
     <x-site-branding />
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body><x-site-header /><x-site-navbar /><main>@yield('content')</main><x-site-footer /></body>
+<body class="screen-shell"><x-site-header /><x-site-navbar /><main>@yield('content')</main><x-site-footer /></body>
 </html>

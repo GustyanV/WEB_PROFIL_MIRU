@@ -237,6 +237,16 @@ Hubungkan penyimpanan publik agar gambar dan unggahan dapat diakses:
 php artisan storage:link
 ```
 
+Dokumen pribadi SPMB disimpan pada storage/app/private/spmb dan diakses melalui route yang memeriksa login serta hak pemilik/admin. Gambar CMS tetap menggunakan penyimpanan publik.
+
+Untuk instalasi existing, pindahkan berkas SPMB lama dengan perintah berikut. Perintah memverifikasi salinan privat sebelum menghapus salinan publik dan dapat dijalankan ulang:
+
+```powershell
+php artisan spmb:privatize-documents
+```
+
+Reset password tersedia melalui halaman lupa password. Pengiriman tautan memerlukan konfigurasi email; MAIL_MAILER=log hanya menulis email ke log lokal.
+
 Tautan public/storage mengarah ke storage/app/public. Jika tautan sudah tersedia, tidak perlu membuat ulang. Pastikan APP_URL sesuai alamat aplikasi dan direktori penyimpanan dapat ditulis.
 
 ## Menjalankan Vite

@@ -3,7 +3,7 @@
 @section('content')
 <section class="page-shell">
 <div class="max-w-2xl"><p class="text-sm font-bold tracking-wider text-primary">{{ $siteProfile?->name ?? 'Madrasah' }}</p><h1 class="mt-2 text-4xl">{{ $title }}</h1><p class="mt-3 leading-7 text-slate-600">Informasi terbaru dari madrasah.</p></div>
-<div class="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+<div class="mt-9 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 @forelse($items as $item)
 @php
     $image=$item->photo ?? $item->image ?? $item->thumbnail ?? $item->cover ?? null;

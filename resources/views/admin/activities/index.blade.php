@@ -8,7 +8,7 @@
 <label class="text-sm">Status<select name="status" class="form-control"><option value="">Semua status</option>@foreach(['draft','published'] as $status)<option @selected(request('status') === $status)>{{ $status }}</option>@endforeach</select></label>
 <div class="flex items-end gap-3"><button class="btn-primary">Filter</button><a href="{{ route('admin.activities.index') }}" class="btn-secondary">Reset</a></div>
 </form>
-<div class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr>@foreach(['Thumbnail','Judul','Kategori','Tanggal Kegiatan','Status','Published At','Aksi'] as $label)<th class="whitespace-nowrap p-3">{{ $label }}</th>@endforeach</tr></thead>
+<div role="region" aria-label="Tabel data, geser untuk melihat kolom lainnya" tabindex="0" class="overflow-x-auto"><table class="w-full text-left text-sm"><thead><tr>@foreach(['Thumbnail','Judul','Kategori','Tanggal Kegiatan','Status','Published At','Aksi'] as $label)<th class="whitespace-nowrap p-3">{{ $label }}</th>@endforeach</tr></thead>
 <tbody>@forelse($activities as $activity)<tr class="border-t">
 <td class="p-3"><img src="{{ $activity->image_url }}" alt="{{ $activity->title }}" class="h-14 w-20 max-w-none rounded-lg object-cover"></td>
 <td class="p-3 font-bold">{{ $activity->title }}</td><td class="p-3">{{ $activity->category }}</td><td class="whitespace-nowrap p-3">{{ $activity->activity_date->format('d/m/Y') }}</td>

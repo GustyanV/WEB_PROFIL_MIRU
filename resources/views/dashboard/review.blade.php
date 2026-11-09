@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.applicant')
 @section('title', 'Review Pendaftaran')
 @section('content')
 <div class="page-shell max-w-4xl">

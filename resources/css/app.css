@@ -52,3 +52,72 @@
 @media (min-width: 768px) {
     .combined-hero-inner { min-height: clamp(540px, 37.5vw, 780px); }
 }
+/* Screen-only sizing: PDF views keep their own styles. */
+@media screen {
+    .screen-shell { overflow-wrap: anywhere; }
+    .screen-shell .grid > *, .screen-shell form, .screen-shell label { min-width: 0; }
+    .screen-shell :where(img, video, iframe, svg) { max-width: 100%; }
+    .screen-shell :where(input, select, textarea) { min-width: 0; max-width: 100%; }
+    .screen-shell input[type="file"]:not(.sr-only) { width: 100%; }
+    .screen-shell :where(input[type="date"], input[type="datetime-local"]) { width: 100%; }
+    .screen-shell :where(button, a, summary, input, select, textarea):focus-visible {
+        outline: 2px solid #0d9488; outline-offset: 3px;
+    }
+    .screen-shell :where(.btn-primary, .btn-secondary, .btn-danger, .mobile-link) {
+        min-height: 44px; max-width: 100%; white-space: normal; text-align: center;
+    }
+    .screen-shell .mobile-link { text-align: left; }
+    .admin-shell table th, .admin-shell table td { overflow-wrap: normal; }
+    .admin-shell .overflow-x-auto { max-width: 100%; overscroll-behavior-x: contain; }
+    .admin-shell .overflow-x-auto table { min-width: 40rem; }
+    .admin-shell table :where(a, button) { display: inline-flex; align-items: center; min-height: 44px; }
+    .sidebar-drawer { max-height: 100dvh; }
+    .applicant-shell main > .page-shell { padding: 0; }
+    .applicant-shell main > .my-8 { margin-top: 0; margin-bottom: 0; }
+    .mobile-navigation { max-height: calc(100dvh - 5rem); }
+    .activity-lightbox { max-height: 100dvh; }
+}
+@layer components {
+    .admin-toolbar { @apply flex min-w-0 flex-col gap-3 md:flex-row md:flex-wrap md:items-end; }
+    .admin-toolbar > input, .admin-toolbar > select { @apply w-full md:w-auto; }
+    .admin-toolbar > .form-control { @apply md:flex-1; }
+}
+@media screen and (max-width: 767px) {
+    .screen-shell h1 { font-size: clamp(1.65rem, 6.5vw, 2rem); line-height: 1.2; }
+    .screen-shell h2.text-3xl { font-size: 1.6rem; line-height: 1.3; }
+    .screen-shell :where(input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not(.sr-only), select, textarea) {
+        font-size: 16px; min-height: 44px;
+    }
+    .admin-shell main > .my-8 { margin-top: 0; margin-bottom: 0; }
+    .admin-shell main > .p-6 { padding: 1rem; }
+    .applicant-shell main > .p-6, .applicant-shell main > .p-8 { padding: 1.25rem; }
+    .applicant-shell .surface-card { padding: 1rem; }
+}
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+    .nav-link { padding-left: .5rem; padding-right: .5rem; font-size: .65rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .sidebar-drawer { transition: none; }
+}
+
+@media screen and (max-width: 767px) { .combined-hero:not(.has-banner) .combined-hero-inner { min-height: 0; } }
+
+@media screen {
+    .screen-shell .sidebar-drawer :where(a, button):focus-visible,
+    .screen-shell .nav-link:focus-visible,
+    .screen-shell [aria-controls="public-navigation"]:focus-visible { outline-color: #f4b942; }
+}
+/* Login branding is scoped so register and password recovery keep their layouts. */
+.login-page {
+    background-image: radial-gradient(ellipse at 12% 15%, rgb(15 139 131 / .08), transparent 50%), radial-gradient(ellipse at 95% 90%, rgb(244 185 66 / .08), transparent 45%);
+}
+.login-brand-panel {
+    background-color: rgb(var(--site-primary-dark, 8 106 100));
+    background-image: radial-gradient(circle at 1px 1px, rgb(255 255 255 / .08) 1px, transparent 0), linear-gradient(145deg, rgb(var(--site-primary, 15 139 131)), rgb(var(--site-primary-dark, 8 106 100)));
+    background-size: 22px 22px, auto;
+}
+.login-brand-panel a:focus-visible { outline-color: #f4b942; }
+@media screen and (max-width: 1023px) {
+    .login-brand-panel { gap: 1.5rem; }
+}

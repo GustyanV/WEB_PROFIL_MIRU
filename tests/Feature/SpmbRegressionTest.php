@@ -9,7 +9,7 @@ class SpmbRegressionTest extends TestCase
 {
     protected function setUp(): void {
         parent::setUp(); config(['database.default'=>'sqlite','database.connections.sqlite.database'=>':memory:']);
-        $this->artisan('migrate',['--force'=>true])->assertExitCode(0); Storage::fake('public');
+        $this->artisan('migrate',['--force'=>true])->assertExitCode(0); Storage::fake('public'); Storage::fake('spmb');
     }
     private function user($role,$email) { return User::create(['name'=>'Test '.$role,'email'=>$email,'phone'=>'08123456789','password'=>Hash::make('password123'),'role'=>$role]); }
     public function test_application_submission_revision_acceptance_pdf_qr_and_export() {
@@ -68,14 +68,14 @@ class SpmbRegressionTest extends TestCase
         $a2=StudentApplication::create(['user_id'=>$u2->id,'status'=>'accepted','registration_number'=>'SPMB-filter-2']);
         $this->actingAs($admin)->get('/admin/pendaftar?search=Test&status=submitted')->assertOk()->assertSee('SPMB-filter-1')->assertDontSee('SPMB-filter-2');
         $this->actingAs($u1);
-        $a1->update(['status'=>'revision']);
+        $a1->update(['status'=>'draft','registration_number'=>null]);
         $a1->studentProfile()->create(['full_name'=>'Siswa','gender'=>'L','address'=>'Alamat']);
         $a1->parentProfile()->create(['father_name'=>'Ayah','mother_name'=>'Ibu']);
         foreach (['student_photo','family_card','birth_certificate'] as $type) $a1->documents()->create(['document_type'=>$type,'file_path'=>'spmb/test.png','original_name'=>'test.png','mime_type'=>'image/png','file_size'=>100]);
         $period=AdmissionPeriod::create(['name'=>'Periode Tertutup','academic_year'=>'2026/2027','start_date'=>today()->subDay(),'end_date'=>today()->addDay(),'is_active'=>false]);
         AdmissionWave::create(['admission_period_id'=>$period->id,'name'=>'Gelombang','start_date'=>today()->subDay(),'end_date'=>today()->addDay(),'is_active'=>true]);
         $this->post('/dashboard/submit')->assertRedirect(route('applicant.review'))->assertSessionHasErrors('submit');
-        $this->assertSame('revision',$a1->fresh()->status);
+        $this->assertSame('draft',$a1->fresh()->status);
     }
     public function test_pdf_long_data_preserves_a4_logo_qr_and_layout()
     {

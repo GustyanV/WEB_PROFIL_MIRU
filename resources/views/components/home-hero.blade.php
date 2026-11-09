@@ -4,7 +4,7 @@
     $desktop=$hero?->desktop_banner_url;
     $mobile=$hero?->mobile_banner_url;
 @endphp
-<section class="combined-hero relative isolate overflow-hidden bg-primary-dark" aria-label="Informasi utama madrasah">
+<section class="combined-hero {{ ($desktop || $mobile) ? 'has-banner' : '' }} relative isolate overflow-hidden bg-primary-dark" aria-label="Informasi utama madrasah">
     @if($desktop || $mobile)
     <picture class="absolute inset-0 -z-20 block h-full w-full">
         @if($mobile)<source media="(max-width: 767px)" srcset="{{ $mobile }}">@endif
@@ -12,8 +12,8 @@
     </picture>
     @endif
     <div class="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-t from-black/65 via-black/10 to-transparent md:bg-gradient-to-l md:from-black/40 md:via-transparent md:to-transparent"></div>
-    <div class="combined-hero-inner mx-auto flex w-full max-w-7xl items-end px-5 pb-10 pt-72 md:items-center md:px-8 md:py-12">
-        <div class="w-full min-w-0 md:ml-auto md:w-1/2 md:pl-8 lg:pl-10">
+    <div class="combined-hero-inner mx-auto flex w-full max-w-7xl items-end px-5 pb-10 {{ ($desktop || $mobile) ? 'pt-72' : 'pt-10' }} md:items-center md:px-8 md:py-12">
+        <div class="w-full min-w-0 md:ml-auto md:w-3/5 lg:w-1/2 md:pl-8 lg:pl-10">
             @if(!$hero || $hero->small_text || $hero->academic_year)
             <span class="inline-block max-w-full break-words rounded-full bg-accent px-4 py-2 text-xs font-extrabold tracking-widest text-slate-900">{{ $hero ? $hero->small_text : 'SPMB' }} {{ $hero ? $hero->academic_year : $admissionPeriod?->academic_year }}</span>
             @endif

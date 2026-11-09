@@ -1,4 +1,4 @@
-@extends('layouts.auth')
+@extends('layouts.applicant')
 @section('title', 'Status Pendaftaran')
 @section('content')
 @php($statusClass = 'status-'.str_replace('_', '-', $app->status))

@@ -1,5 +1,5 @@
 <footer id="contact" class="bg-primary-dark text-teal-50">
-<div class="page-shell grid gap-8 py-12 sm:grid-cols-2 lg:grid-cols-4">
+<div class="page-shell grid gap-8 py-12 md:grid-cols-2 lg:grid-cols-4">
 <div class="lg:col-span-2"><div class="flex items-center gap-3">
 <img src="{{ $siteProfile?->site_logo_url ?? asset('images/logo-miru.png') }}" alt="Logo {{ $siteProfile?->name ?? 'Madrasah' }}" class="h-14 w-14 shrink-0 rounded-xl bg-white object-contain p-1">
 <div class="min-w-0"><p class="break-words font-extrabold text-white">{{ $siteProfile?->name ?? 'MI Raudlatul Ulum' }}</p><p class="mt-1 text-sm text-teal-100">{{ $siteProfile?->tagline ?? 'Website Madrasah' }}</p></div></div>
