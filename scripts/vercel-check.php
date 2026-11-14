@@ -1,6 +1,18 @@
 <?php
 // Executed by the community runtime's Composer "vercel" hook, not by local install.
 // Its upstream installer ignores platform requirements; re-check explicitly.
+// Safe diagnostics run BEFORE Composer platform checks, which can abort the hook.
+// Do not load .env or print environment values here.
+if (in_array('--diagnostics', $argv ?? [], true)) {
+    fwrite(STDOUT, 'PHP_VERSION='.PHP_VERSION."\n");
+    fwrite(STDOUT, 'PHP_BINARY='.PHP_BINARY."\n");
+    fwrite(STDOUT, 'PHP_INI='.(php_ini_loaded_file() ?: '(none)')."\n");
+    fwrite(STDOUT, 'PHP_INI_SCANNED='.(php_ini_scanned_files() ?: '(none)')."\n");
+    foreach (['pdo_pgsql','gd','mbstring','fileinfo','dom','openssl'] as $extension) {
+        fwrite(STDOUT, 'ext-'.$extension.'='.(extension_loaded($extension) ? 'loaded' : 'MISSING')."\n");
+    }
+    exit(0); // Diagnostics only. The mandatory checks below still run separately.
+}
 $required=['pdo_pgsql','gd','mbstring','fileinfo','dom','openssl'];
 foreach($required as $extension) {
     if(!extension_loaded($extension)) {

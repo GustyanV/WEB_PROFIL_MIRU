@@ -37,6 +37,7 @@
     },
     "scripts": {
         "vercel": [
+            "@php scripts/vercel-check.php --diagnostics",
             "@composer check-platform-reqs --no-dev",
             "@php scripts/vercel-check.php"
         ],
