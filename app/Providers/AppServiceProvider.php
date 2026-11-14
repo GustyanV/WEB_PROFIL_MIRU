@@ -10,7 +10,12 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register() {}
+    public function register()
+    {
+        $this->app->afterResolving('filesystem', function ($manager) {
+            $manager->extend('s3', \Closure::fromCallable([\App\Support\S3PathEndpoint::class, 'disk']));
+        });
+    }
 
     public function boot()
     {
