@@ -98,8 +98,10 @@ class DeploymentCompatibilityTest extends TestCase
         $this->assertSame(404,$config['routes'][0]['status']);
         $this->assertMatchesRegularExpression('~^'.$config['routes'][0]['src'].'$~','/storage/spmb/private.pdf');
         $this->assertMatchesRegularExpression('~^'.$config['routes'][1]['src'].'$~','/.env');
-        $this->assertSame('filesystem',$config['routes'][3]['handle']);
-        $this->assertSame('/api/index.php',$config['routes'][4]['dest']);
+        $this->assertSame('/',$config['routes'][3]['src']);
+        $this->assertSame('/api/index.php',$config['routes'][3]['dest']);
+        $this->assertSame([],array_values(array_filter($config['routes'],fn($route)=>isset($route['handle']))));
+        $this->assertSame('/api/index.php',$config['routes'][count($config['routes'])-1]['dest']);
         $this->assertFileExists(public_path('images/logo-miru.png'));
     }
 }

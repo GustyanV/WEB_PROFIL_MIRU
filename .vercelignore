@@ -19,3 +19,10 @@
 *.bak
 *.zip
 auth.json
+
+# PHP is executed only through api/index.php, never published as a public asset.
+/public/index.php
+/public/**/*.[pP][hH][pP]*
+/public/**/*.[pP][hH][tT][mM][lL]
+/public/**/*.[pP][hH][aA][rR]
+/public/.htaccess

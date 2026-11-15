@@ -17,15 +17,24 @@
       "status": 404
     },
     {
-      "src": "/(?:\\.env[^/]*|\\.git)(?:/.*)?",
+      "src": "/(?:.*/)?\\.[^/]*(?:/.*)?",
       "status": 404
     },
     {
-      "src": "/.*\\.php",
+      "src": "/.*\\.(?:[pP][hH][pP][0-9]?|[pP][hH][tT][mM][lL]|[pP][hH][aA][rR]|[iI][nN][cC])(?:[./].*)?",
+      "status": 404
+    },
+    {
+      "src": "/",
       "dest": "/api/index.php"
     },
     {
-      "handle": "filesystem"
+      "src": "/((?:build|images)/.*\\.(?:css|js|mjs|png|jpg|jpeg|gif|webp|avif|svg|ico|woff|woff2|ttf|otf|eot)|build/manifest\\.json)",
+      "dest": "/$1"
+    },
+    {
+      "src": "/([^/]+\\.(?:css|js|mjs|ico|png|jpg|jpeg|gif|webp|avif|svg|txt|xml|webmanifest|woff|woff2|ttf|otf|pdf))",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",
