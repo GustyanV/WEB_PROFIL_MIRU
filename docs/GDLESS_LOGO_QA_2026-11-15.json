@@ -1,0 +1,109 @@
+{
+  "cases": [
+    {
+      "kind": "png-transparent",
+      "width": 240,
+      "height": 120,
+      "pdfWidth": 240,
+      "pdfHeight": 120,
+      "bytes": 2807,
+      "psnr": 54.167796896258665,
+      "hash": "99d263a89c8895763d535d822d4a2d588d99d55319bf154dc32158e7b4400a01"
+    },
+    {
+      "kind": "png",
+      "width": 4252,
+      "height": 2835,
+      "pdfWidth": 4252,
+      "pdfHeight": 2835,
+      "bytes": 1036356,
+      "psnr": 71.5404149300945,
+      "hash": "1671f7dbc72f4f73a7f722c0dc5f504b1efc0648175495c52691222c235ac71d"
+    },
+    {
+      "kind": "jpeg",
+      "width": 240,
+      "height": 120,
+      "pdfWidth": 240,
+      "pdfHeight": 120,
+      "bytes": 2038,
+      "psnr": 100,
+      "hash": "c5ae07a575abf1610e1fc2d8db941191d539879ea936135058f0ae4db7a7dd86"
+    },
+    {
+      "kind": "webp",
+      "width": 240,
+      "height": 120,
+      "pdfWidth": 240,
+      "pdfHeight": 120,
+      "bytes": 4033,
+      "psnr": 50.8028330826918,
+      "hash": "45a017901000f90152d304af7f941f71eed94d199f111a394ef2b85015b145ab"
+    },
+    {
+      "kind": "large",
+      "width": 3000,
+      "height": 2000,
+      "pdfWidth": 3000,
+      "pdfHeight": 2000,
+      "bytes": 86442,
+      "psnr": 54.18685632960522,
+      "hash": "08a392fc522d3ea4b967909ad561911cb1263da1fc459ca8f02e520c5d268ede"
+    }
+  ],
+  "oversizedRejected": true,
+  "blockedBeforeApproval": true,
+  "allowedAfterApproval": true,
+  "pdfWithoutGd": [
+    {
+      "kind": "png-transparent",
+      "gd": false,
+      "jpeg": true,
+      "qrSvg": true,
+      "applicantPdf": true,
+      "adminPdf": true,
+      "width": 82,
+      "height": 41
+    },
+    {
+      "kind": "png",
+      "gd": false,
+      "jpeg": true,
+      "qrSvg": true,
+      "applicantPdf": true,
+      "adminPdf": true,
+      "width": 82,
+      "height": 54.67
+    },
+    {
+      "kind": "jpeg",
+      "gd": false,
+      "jpeg": true,
+      "qrSvg": true,
+      "applicantPdf": true,
+      "adminPdf": true,
+      "width": 82,
+      "height": 41
+    },
+    {
+      "kind": "webp",
+      "gd": false,
+      "jpeg": true,
+      "qrSvg": true,
+      "applicantPdf": true,
+      "adminPdf": true,
+      "width": 82,
+      "height": 41
+    },
+    {
+      "kind": "large",
+      "gd": false,
+      "jpeg": true,
+      "qrSvg": true,
+      "applicantPdf": true,
+      "adminPdf": true,
+      "width": 82,
+      "height": 54.67
+    }
+  ]
+}

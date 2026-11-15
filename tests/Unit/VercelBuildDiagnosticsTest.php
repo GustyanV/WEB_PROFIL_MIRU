@@ -17,7 +17,7 @@ class VercelBuildDiagnosticsTest extends TestCase
         $status=proc_close($process);
         $this->assertSame(0,$status,$error);
         $this->assertStringContainsString('PHP_VERSION='.PHP_VERSION,$output);
-        foreach(['pdo_pgsql','gd','mbstring','fileinfo','dom','openssl'] as $ext) {
+        foreach(['pdo_pgsql','xmlwriter','mbstring','fileinfo','dom','openssl'] as $ext) {
             $this->assertStringContainsString('ext-'.$ext.'='.(extension_loaded($ext)?'loaded':'MISSING'),$output);
         }
         $this->assertStringNotContainsString('DO_NOT_PRINT_THIS_SECRET',$output.$error);

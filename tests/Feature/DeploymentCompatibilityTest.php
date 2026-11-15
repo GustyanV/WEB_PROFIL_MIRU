@@ -58,12 +58,14 @@ class DeploymentCompatibilityTest extends TestCase
         Storage::fake('public');
         $file=\Illuminate\Http\UploadedFile::fake()->image('logo.png',23,31);
         Storage::disk('public')->put('site/logo.png',file_get_contents($file->getRealPath()));
+        $jpeg=\Illuminate\Http\UploadedFile::fake()->image('logo.jpg',23,31);
+        Storage::disk('public')->put(app(\App\Support\PdfLogo::class)->key(file_get_contents($file->getRealPath())),file_get_contents($jpeg->getRealPath()));
         SchoolProfile::create(['name'=>'Madrasah Pengujian','logo'=>'site/logo.png']);
         $user=\App\Models\User::factory()->create(['role'=>'pendaftar']);
         $application=\App\Models\StudentApplication::create(['user_id'=>$user->id,'status'=>'submitted','registration_number'=>'SPMB-CLOUD-0001']);
         $response=$this->actingAs($user)->get('/dashboard/cetak-bukti/'.$application->id)->assertOk();
         $data=$response->original->getData();
-        $size=getimagesizefromstring(base64_decode(substr($data['logo'],strlen('data:image/png;base64,'))));
+        $size=getimagesizefromstring(base64_decode(substr($data['logo'],strlen('data:image/jpeg;base64,'))));
         $this->assertSame(23,$size[0]); $this->assertSame(31,$size[1]);
         $this->assertSame(route('spmb.verify',['token'=>$application->fresh()->public_token]),$data['url']);
         $this->get('/dashboard/cetak-bukti/'.$application->id.'/pdf')->assertOk()->assertHeader('Content-Type','application/pdf');

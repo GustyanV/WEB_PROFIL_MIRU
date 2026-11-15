@@ -1,0 +1,37 @@
+const fs=require('node:fs'),path=require('node:path'),http=require('node:http'),{spawn}=require('node:child_process');
+const root=process.cwd(),out=path.join(root,'storage/app/testing/pdf-logo-browser');fs.mkdirSync(out,{recursive:true});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+(async()=>{let chrome,ws,server;try{
+ server=http.createServer((req,res)=>{let file;if(req.url==='/module.js')file='resources/js/pdf-logo.js';else if(req.url==='/original.png')file='public/images/logo-miru.png';else if(req.url==='/jpeg')file='storage/app/testing/pdf-logo-audit/logo.jpeg';else if(req.url==='/webp')file='storage/app/testing/pdf-logo-audit/logo.webp';else {res.setHeader('Content-Type','text/html');return res.end('<!doctype html><body>PDF logo browser test</body>');}res.setHeader('Cache-Control','no-store');res.setHeader('Content-Type',req.url==='/module.js'?'text/javascript':req.url==='/jpeg'?'image/jpeg':req.url==='/webp'?'image/webp':'image/png');res.end(fs.readFileSync(path.join(root,file)));});
+ await new Promise(r=>server.listen(0,'127.0.0.1',r));const base='http://127.0.0.1:'+server.address().port;
+ const debug=await new Promise(r=>{const s=require('node:net').createServer();s.listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>r(p));});});
+ const exe=['C:/Program Files/Google/Chrome/Application/chrome.exe','C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(fs.existsSync);if(!exe)throw Error('Chrome/Edge missing');
+ chrome=spawn(exe,['--headless=new','--disable-gpu','--no-first-run','--remote-debugging-port='+debug,'--user-data-dir='+fs.mkdtempSync(path.join(out,'chrome-')),base],{stdio:'ignore',windowsHide:true,env:{...process.env,TMP:out,TEMP:out}});
+ let target;for(let i=0;i<100;i++){try{target=(await(await fetch('http://127.0.0.1:'+debug+'/json')).json()).find(t=>t.type==='page');if(target)break;}catch{}await sleep(100);}
+ ws=new WebSocket(target.webSocketDebuggerUrl);await new Promise((r,j)=>{ws.onopen=r;ws.onerror=j;});let seq=0;const pending=new Map();ws.onmessage=({data})=>{const m=JSON.parse(data);if(m.method==='Network.loadingFailed')console.error('Network loading failure: '+m.params.errorText);if(m.id){const p=pending.get(m.id);pending.delete(m.id);m.error?p.reject(Error(JSON.stringify(m.error))):p.resolve(m.result);}};
+ const call=(method,params={})=>new Promise((resolve,reject)=>{const id=++seq;const timer=setTimeout(()=>{pending.delete(id);reject(Error(method+' timed out'));},30000);pending.set(id,{resolve:value=>{clearTimeout(timer);resolve(value)},reject:error=>{clearTimeout(timer);reject(error)}});ws.send(JSON.stringify({id,method,params}));});
+ const run=async expression=>{const r=await call('Runtime.evaluate',{expression,awaitPromise:true,returnByValue:true});if(r.exceptionDetails)throw Error(r.exceptionDetails.exception?.description||r.exceptionDetails.text);return r.result.value;};
+ await call('Network.enable');await call('Network.setCacheDisabled',{cacheDisabled:true});await call('Page.enable');await call('Page.navigate',{url:base});for(let i=0;i<100;i++){if(await run('location.origin === '+JSON.stringify(base)+' && document.readyState === "complete"'))break;await sleep(50);}
+ const result=await run(`(async()=>{
+ const {convertPdfLogo,setupPdfLogoForms}=await import('/module.js');const cases=[];let packaged;
+ for(const kind of ['png-transparent','png','jpeg','webp','large']){
+  let blob;
+  if(kind==='png'){const bytes=Uint8Array.from(atob(${JSON.stringify(fs.readFileSync(path.join(root,'public/images/logo-miru.png')).toString('base64'))}),x=>x.charCodeAt(0));blob=new Blob([bytes],{type:'image/png'});}
+  else {const c=document.createElement('canvas');c.width=kind==='large'?3000:240;c.height=kind==='large'?2000:120;const x=c.getContext('2d');x.fillStyle=kind==='large'?'#0d9488':'rgba(13,148,136,.35)';x.fillRect(0,0,c.width,c.height);x.fillStyle='#e87500';x.fillRect(c.width/4,c.height/4,c.width/2,c.height/2);blob=await new Promise(r=>c.toBlob(r,kind==='jpeg'?'image/jpeg':kind==='webp'?'image/webp':'image/png'));}
+  const converted=await convertPdfLogo(blob).catch(e=>{throw Error(kind+': '+e.message)}),a=await createImageBitmap(blob),b=await createImageBitmap(converted.file);
+  const c=document.createElement('canvas');c.width=82;c.height=82;const x=c.getContext('2d');x.fillStyle='white';x.fillRect(0,0,82,82);x.drawImage(a,0,0,82,82);const expected=x.getImageData(0,0,82,82).data;x.clearRect(0,0,82,82);x.drawImage(b,0,0,82,82);const actual=x.getImageData(0,0,82,82).data;let mse=0;for(let i=0;i<actual.length;i++)if(i%4!==3)mse+=(actual[i]-expected[i])**2;mse/=82*82*3;const psnr=mse?10*Math.log10(255**2/mse):100;
+  const data=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(',')[1]);f.readAsDataURL(converted.file);});
+  const sourceData=await new Promise(r=>{const f=new FileReader();f.onload=()=>r(f.result.split(',')[1]);f.readAsDataURL(blob);});
+  cases.push({sourceData,kind,width:a.width,height:a.height,pdfWidth:b.width,pdfHeight:b.height,bytes:converted.file.size,psnr,hash:converted.hash,data});if(kind==='png')packaged=data;a.close();b.close();
+ }
+ let oversizedRejected=false;const huge=document.createElement('canvas');huge.width=5000;huge.height=5000;try{await convertPdfLogo(await new Promise(r=>huge.toBlob(r,'image/png')));}catch{oversizedRejected=true;}
+ document.body.innerHTML='<form data-pdf-logo-form data-logo-source="/jpeg"><input type="file" name="logo"><input type="file" name="pdf_logo" hidden><input name="pdf_logo_hash"><input type="checkbox" name="pdf_logo_approved" value="1"><img data-pdf-logo-preview hidden><p data-pdf-logo-message></p><button type="button" data-prepare-existing-logo>Prepare</button></form>';
+ setupPdfLogoForms();document.querySelector('button').click();for(let i=0;i<200&&!document.querySelector('[name=pdf_logo]').files.length;i++)await new Promise(r=>setTimeout(r,50));
+ const form=document.querySelector('form'),first=new Event('submit',{cancelable:true});form.dispatchEvent(first);document.querySelector('[name=pdf_logo_approved]').checked=true;const second=new Event('submit',{cancelable:true});form.dispatchEvent(second);
+ return {cases,oversizedRejected,blockedBeforeApproval:first.defaultPrevented,allowedAfterApproval:!second.defaultPrevented,packaged};
+})()`);
+ for(const c of result.cases){fs.writeFileSync(path.join(out,c.kind+'.source.'+(c.kind==='jpeg'?'jpg':c.kind==='webp'?'webp':'png')),Buffer.from(c.sourceData,'base64'));delete c.sourceData;fs.writeFileSync(path.join(out,c.kind+'.jpg'),Buffer.from(c.data,'base64'));delete c.data;if(c.width!==c.pdfWidth||c.height!==c.pdfHeight||c.psnr<38)throw Error('Quality/dimensions rejected: '+JSON.stringify(c));}
+ if(!result.oversizedRejected||!result.blockedBeforeApproval||!result.allowedAfterApproval)throw Error('Browser UI guard failed');
+ if(process.argv.includes('--write-packaged'))fs.writeFileSync(path.join(root,'public/images/logo-miru-pdf.jpg'),Buffer.from(result.packaged,'base64'));
+ delete result.packaged;fs.writeFileSync(path.join(out,'report.json'),JSON.stringify(result,null,2));console.log(JSON.stringify(result,null,2));
+ }catch(e){console.error(e.message);process.exitCode=1;}finally{if(ws)ws.close();if(chrome)chrome.kill();if(server)server.close();}})();

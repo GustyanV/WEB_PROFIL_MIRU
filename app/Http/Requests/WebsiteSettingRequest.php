@@ -7,6 +7,9 @@ class WebsiteSettingRequest extends FormRequest {
         'name'=>['required','string','max:255'],'tagline'=>['nullable','string','max:255'],
         'footer_text'=>['nullable','string','max:5000'],'copyright_text'=>['nullable','string','max:500'],
         'logo'=>['nullable','image','mimes:jpg,jpeg,png,webp','max:2048'],
+        'pdf_logo'=>['nullable','file','mimetypes:image/jpeg','mimes:jpg,jpeg','max:2048'],
+        'pdf_logo_hash'=>['nullable','string','max:64'],
+        'pdf_logo_approved'=>['sometimes','accepted'],
         'favicon'=>['nullable','file','mimes:png,ico','max:1024',function($attribute,$value,$fail) {
             $extension=strtolower($value->getClientOriginalExtension());
             $bytes=file_get_contents($value->getRealPath());

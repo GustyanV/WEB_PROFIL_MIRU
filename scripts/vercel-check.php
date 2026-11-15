@@ -8,12 +8,12 @@ if (in_array('--diagnostics', $argv ?? [], true)) {
     fwrite(STDOUT, 'PHP_BINARY='.PHP_BINARY."\n");
     fwrite(STDOUT, 'PHP_INI='.(php_ini_loaded_file() ?: '(none)')."\n");
     fwrite(STDOUT, 'PHP_INI_SCANNED='.(php_ini_scanned_files() ?: '(none)')."\n");
-    foreach (['pdo_pgsql','gd','mbstring','fileinfo','dom','openssl'] as $extension) {
+    foreach (['pdo_pgsql','xmlwriter','mbstring','fileinfo','dom','openssl'] as $extension) {
         fwrite(STDOUT, 'ext-'.$extension.'='.(extension_loaded($extension) ? 'loaded' : 'MISSING')."\n");
     }
     exit(0); // Diagnostics only. The mandatory checks below still run separately.
 }
-$required=['pdo_pgsql','gd','mbstring','fileinfo','dom','openssl'];
+$required=['pdo_pgsql','xmlwriter','mbstring','fileinfo','dom','openssl'];
 foreach($required as $extension) {
     if(!extension_loaded($extension)) {
         fwrite(STDERR,"Required Vercel PHP extension unavailable: ".$extension."\n");

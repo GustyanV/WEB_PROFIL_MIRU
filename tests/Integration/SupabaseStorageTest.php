@@ -19,6 +19,32 @@ class SupabaseStorageTest extends TestCase
         $this->checkDisk('spmb','documents',false);
     }
 
+    public function test_original_logo_and_pdf_derivative_round_trip_on_supabase(): void
+    {
+        if (getenv('RUN_SUPABASE_STORAGE_TESTS')!=='1') $this->markTestSkipped('Live storage checks require opt-in.');
+        $app=require dirname(__DIR__,2).'/bootstrap/app.php';$app->loadEnvironmentFrom('.env.supabase');$app->make(Kernel::class)->bootstrap();
+        $this->assertSame('s3',config('filesystems.disks.public.driver'));
+        $this->assertSame('media',config('filesystems.disks.public.bucket'));
+        $root='_integration-checks/'.bin2hex(random_bytes(16));
+        config(['filesystems.disks.public.root'=>$root]);Storage::forgetDisk('public');
+        $disk=Storage::disk('public');$helper=app(\App\Support\PdfLogo::class);
+        $original=file_get_contents(dirname(__DIR__,2).'/storage/app/testing/pdf-logo-browser/png-transparent.source.png');
+        $jpeg=file_get_contents(dirname(__DIR__,2).'/storage/app/testing/pdf-logo-browser/png-transparent.jpg');
+        $key=$helper->key($original);
+        try {
+            $this->assertTrue($disk->put('original.png',$original));
+            $this->assertSame($key,$helper->storeDerivative($original,$jpeg));
+            $this->assertSame($original,$helper->source(new \App\Models\SchoolProfile(['logo'=>'original.png'])));
+            $this->assertSame('data:image/jpeg;base64,'.base64_encode($jpeg),$helper->forProfile(new \App\Models\SchoolProfile(['logo'=>'original.png'])));
+            $this->assertSame($original,$disk->get('original.png'));
+        } catch (\Throwable $e) {
+            $this->fail('Supabase logo round-trip failed; details redacted ('.get_class($e).').');
+        } finally {
+            try { $disk->delete(['original.png',$key]);$this->assertFalse($disk->exists('original.png'));$this->assertFalse($disk->exists($key)); }
+            catch (\Throwable $e) { $this->fail('Cleanup failed for test prefix '.$root); }
+        }
+    }
+
     private function checkDisk(string $diskName, string $bucket, bool $public): void
     {
         if (getenv('RUN_SUPABASE_STORAGE_TESTS') !== '1') {

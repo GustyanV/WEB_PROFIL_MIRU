@@ -113,6 +113,9 @@ class CmsStageTwoTest extends TestCase
         $this->actingAs($this->user());
         $this->get('/admin/pengaturan-website')->assertOk();
         $data=['name'=>'Website Madrasah Baru','tagline'=>'Tagline baru madrasah','footer_text'=>'Teks footer dari CMS','copyright_text'=>'Hak cipta madrasah','primary_color'=>'#123456','accent_color'=>'#FEDCBA','logo'=>UploadedFile::fake()->image('logo.png'),'favicon'=>UploadedFile::fake()->image('favicon.png')];
+        $data['pdf_logo']=UploadedFile::fake()->image('logo-pdf.jpg');
+        $data['pdf_logo_hash']=hash_file('sha256',$data['logo']->getRealPath());
+        $data['pdf_logo_approved']='1';
         $this->put('/admin/pengaturan-website',$data)->assertRedirect()->assertSessionHasNoErrors();
         $profile=SchoolProfile::firstOrFail();
         Storage::disk('public')->assertExists([$profile->logo,$profile->favicon]);
@@ -123,7 +126,7 @@ class CmsStageTwoTest extends TestCase
             if(in_array($url,['/','/kontak','/kegiatan'])) $r->assertSee('Teks footer dari CMS')->assertSee('Tagline baru madrasah')->assertSee('Hak cipta madrasah')->assertSee('storage/'.$profile->logo);
         }
         $this->put('/admin/pengaturan-website',['name'=>'Website Madrasah Baru','logo'=>UploadedFile::fake()->image('new.jpg')])->assertSessionHasNoErrors();
-        Storage::disk('public')->assertMissing($oldLogo);
+        Storage::disk('public')->assertExists($oldLogo);
         $this->assertSame(1,SchoolProfile::count());
         auth()->logout();
         $this->get('/login')->assertOk()->assertSee('Website Madrasah Baru');

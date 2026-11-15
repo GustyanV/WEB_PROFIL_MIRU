@@ -89,7 +89,7 @@ class SpmbRegressionTest extends TestCase
         $this->actingAs($user);
         $preview=$this->get('/dashboard/cetak-bukti/'.$a->id)->assertOk();
         $data=$preview->original->getData();
-        $this->assertStringStartsWith('data:image/png;base64,',$data['logo']);
+        $this->assertStringStartsWith('data:image/jpeg;base64,',$data['logo']);
         $this->assertStringContainsString('<svg',base64_decode($data['qr'],true));
         $this->assertStringContainsString('/verifikasi-spmb/'.$a->fresh()->public_token,$data['url']);
         $pdf=\Barryvdh\DomPDF\Facade\Pdf::loadView('pdf.proof',$data)->setPaper('a4','portrait');

@@ -8,7 +8,7 @@
         body { color: #111827; font-family: DejaVu Sans, sans-serif; font-size: 11px; }
         .letterhead { border-bottom: 4px solid #e87500; padding-bottom: 7px; }
         .letterhead-table { width: 100%; border-collapse: collapse; }
-        .logo-cell { width: 105px; text-align: center; vertical-align: middle; }
+        .logo-cell { height: 82px; width: 105px; text-align: center; vertical-align: middle; }
         .logo { width: 82px; height: 82px; object-fit: contain; }
         .school-info { text-align: center; vertical-align: middle; line-height: 1.35; }
         .foundation { font-family: DejaVu Serif, serif; font-size: 15px; font-weight: bold; }
@@ -29,7 +29,7 @@
         <table class="letterhead-table">
             <tr>
                 <td class="logo-cell">
-                    @if($logo)<img class="logo" src="{{ $logo }}" alt="Logo {{ $school?->name ?: 'Madrasah' }}">@endif
+                    @if($logo)<img class="logo" style="width: {{ $logo_width ?? 82 }}px; height: {{ $logo_height ?? 82 }}px" src="{{ $logo }}" alt="Logo {{ $school?->name ?: 'Madrasah' }}">@endif
                 </td>
                 <td class="school-info">
                     <div class="foundation">PENERIMAAN MURID BARU</div>
