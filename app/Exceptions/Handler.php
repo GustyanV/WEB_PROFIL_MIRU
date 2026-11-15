@@ -42,6 +42,19 @@ class Handler extends ExceptionHandler
      *
      * @return void
      */
+    /** Report one bounded, sanitized diagnostic on Vercel; rendering/status stay unchanged. */
+    public function report(Throwable $e)
+    {
+        $vercel=$this->container->bound('config')
+            ? $this->container->make('config')->get('app.vercel',false)
+            : getenv('VERCEL')==='1';
+        if (!$vercel) { parent::report($e); return; }
+        if ($this->shouldntReport($e) && !($e instanceof \Symfony\Component\HttpKernel\Exception\HttpExceptionInterface && $e->getStatusCode()>=500)) return;
+        $request=$this->container->bound('request') ? $this->container->make('request') : null;
+        \App\Support\SafeExceptionDiagnostic::write($e,$request);
+        // Do not forward the original exception/SQL/bindings to Monolog on Vercel.
+    }
+
     public function register()
     {
         $this->reportable(function (Throwable $e) {
